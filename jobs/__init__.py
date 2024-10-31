@@ -8,6 +8,9 @@ from .edge_site import EdgeDesign
 from .initial_data import InitialDesign
 from .p2p import P2PDesign
 
+# Baxter Jobs
+from .access_design import NewAccessSwitch
+
 __all__ = [
     "CloudNetworkDesign",
     "ControllerDesign",
@@ -16,4 +19,5 @@ __all__ = [
     "InitialDesign",
     "ModuleDesign",
     "P2PDesign",
+    "NewAccessSwitch",
 ]

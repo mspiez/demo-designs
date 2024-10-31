@@ -1,0 +1,218 @@
+---
+tags:
+  - "!create_or_update:name": "origin=baxconfiggen"
+    "content_types":
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+      - "!get:app_label": "ipam"
+        "!get:model": "vlan"
+      - "!get:app_label": "dcim"
+        "!get:model": "interface"
+      - "!get:app_label": "dcim"
+        "!get:model": "device"
+
+roles:
+  - "!create_or_update:name": "Container"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Container_role"
+  - "!create_or_update:name": "Loopback"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Loopback_role"
+  - "!create_or_update:name": "Server"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Server_role"
+  - "!create_or_update:name": "Data"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Data_role"
+  - "!create_or_update:name": "Voice"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Voice_role"
+  - "!create_or_update:name": "Infra"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Infra_role"
+  - "!create_or_update:name": "Wireless_default"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Wireless_default_role"
+  - "!create_or_update:name": "Wireless_ap"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Wireless_ap_default_role"
+  - "!create_or_update:name": "Wlc"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Wlc_role"
+
+
+prefixes:
+  - "!create_or_update:prefix": "{{ loopback_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Loopback"
+    type: "container"
+    status__name:  "Active"
+    description: "Loopback"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "Loopback_prefix"
+
+  - "!create_or_update:prefix": "{{ container_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Container"
+    type: "container"
+    status__name:  "Active"
+    description: "Container"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "container_prefix"
+
+  - "!create_or_update:prefix": "{{ server_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Server"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "server_prefix"
+
+  
+  - "!create_or_update:prefix": "{{ data1_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Data"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "data1_prefix"
+
+  - "!create_or_update:prefix": "{{ voice1_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Voice"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "voice1_prefix"
+
+  - "!create_or_update:prefix": "{{ infra_a_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Infra"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "infra_a_prefix"
+
+  - "!create_or_update:prefix": "{{ infra_b_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Infra"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "infra_b_prefix"
+
+  - "!create_or_update:prefix": "{{ baxwireless_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Wireless_default"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "baxwireless_prefix"
+
+  - "!create_or_update:prefix": "{{ wireless_ap_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Wireless_ap"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "wireless_ap_prefix"
+
+  - "!create_or_update:prefix": "{{ baxmobility_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Wireless_default"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "baxmobility_prefix"
+
+  - "!create_or_update:prefix": "{{ wlc_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Wlc"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "wlc_prefix"
+
+  - "!create_or_update:prefix": "{{ data2_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Data"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "data2_prefix"
+
+  - "!create_or_update:prefix": "{{ voice2_prefix }}"
+    "!create_or_update:namespace__name": "Global"
+    location: "{{ site.id }}"
+    role__name: "Voice"
+    type: "network"
+    status__name:  "Active"
+    description: "Network"
+    tags:
+      - {"!get:name": "origin=baxconfiggen"}
+      - {"!get:name": "remove"}
+    "!ref": "voice2_prefix"
