@@ -1,0 +1,70 @@
+---
+tags:
+  - "!create_or_update:name": "origin=test"
+    "content_types":
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+      - "!get:app_label": "ipam"
+        "!get:model": "vlan"
+      - "!get:app_label": "dcim"
+        "!get:model": "interface"
+      - "!get:app_label": "dcim"
+        "!get:model": "device"
+
+roles:
+  - "!create_or_update:name": "Container"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Container_role"
+  - "!create_or_update:name": "Loopback"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+    "!ref": "Loopback_role"
+  - "!create_or_update:name": "Server"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+      - "!get:app_label": "ipam"
+        "!get:model": "vlan"
+    "!ref": "Server_role"
+  - "!create_or_update:name": "Data"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+      - "!get:app_label": "ipam"
+        "!get:model": "vlan"
+    "!ref": "Data_role"
+  - "!create_or_update:name": "Voice"
+    content_types:
+      - "!get:app_label": "ipam"
+        "!get:model": "prefix"
+      - "!get:app_label": "ipam"
+        "!get:model": "vlan"
+    "!ref": "Voice_role"
+
+
+
+
+
+vlans:
+  - "!create_or_update:vid": "{{ data_vlan_id }}"
+    location: "{{ site.id }}"
+    name: "DATA_{{ data_vlan_id }}"
+    role__name: "Data"
+    status__name:  "Active"
+    description: "Data"
+    tags:
+      - {"!get:name": "origin=test"}
+    "!ref": "data_vlan"
+
+  - "!create_or_update:vid": "{{ voice_vlan_id }}"
+    location: "{{ site.id }}"
+    name: "DATA_{{ voice_vlan_id }}"
+    role__name: "Voice"
+    status__name:  "Active"
+    description: "Voice"
+    tags:
+      - {"!get:name": "origin=test"}
+    "!ref": "voice_vlan"
